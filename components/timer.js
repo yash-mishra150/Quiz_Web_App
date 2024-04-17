@@ -42,7 +42,7 @@ const [timer, setTimer] = useState(Number(initialTimer));
     const secs = seconds % 60;
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
-  
+//   console.log(timer)
   const submitQuiz = () => {
     setIsSubmitted(true);
   };
