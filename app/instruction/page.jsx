@@ -1,5 +1,5 @@
 import React from 'react'
-import Instruction from '../../components/Instruction'
+import Instruction from '../../components/instrunctions/Instruction.js';
 
 const page = () => {
   return (

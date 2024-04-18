@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Nimbus from "../assests/NIMBUS FONT 2.svg";
-import CCC from "../assests/CCC.svg";
+import Nimbus from "../../assests/NIMBUS FONT 2.svg";
+import CCC from "../../assests/CCC.svg";
 import axios from "axios";
 
 const Quiz = () => {
@@ -71,6 +71,7 @@ const Quiz = () => {
         <div className="w-full bg-[#34377A] h-[8vh] mt-4 rounded-xl">
           <Image
             src={Nimbus}
+            alt="alt"
             className=" bg-transparent mx-auto mt-auto h-full"
           />{" "}
         </div>
