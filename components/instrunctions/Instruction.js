@@ -1,10 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Design from "../../assests/title.svg";
 import Image from "next/image";
 import mid from "../../assests/Group 1.svg";
 import logo from "../../assests/CCC_logo.svg";
+import { useRouter } from 'next/navigation';
 
 const Instruction = () => {
+  const [ischecked, setChecked] = useState(false);
+  function handleChange(e) {
+    setChecked(!ischecked);
+  }
+  const router = useRouter();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setTimeout(() => { router.push("/QuizPage") }, 1000);
+  }
   return (
     <div className=" h-[100vh] lg:flex-row  sm:flex ">
       <div className=" bg-[#21234B] h-full w-[30rem] ">
@@ -57,19 +69,21 @@ const Instruction = () => {
                 </div>
               </div>
             </div>
-            <div className=" flex w-full gap-2 text-[#34377A] font-medium">
-              <input type="checkbox" className="mb-5"></input>
-              <p className=" text-[2vh]">
-                By selecting this checkbox, you affirm that you have thoroughly
-                reviewed all provided instructions and hereby express your
-                intent to commence the examination
-              </p>
-            </div>
-          </div>
-          <div className="m-auto mt-9 w-full cursor-pointer h-[5vh]">
-            <button className="w-full bg-[#21234B] h-16 rounded-xl leading-6 text-xl text-[#fff] font-bold size-5 ">
-              Start Test
-            </button>
+            <form onSubmit={handleSubmit}>
+              <div className=" flex w-full gap-2 text-[#34377A] font-medium">
+                <input name="agree" onChange={handleChange} checked={ischecked} type="checkbox" className="mb-5"></input>
+                <p className=" text-[2vh]">
+                  By selecting this checkbox, you affirm that you have thoroughly
+                  reviewed all provided instructions and hereby express your
+                  intent to commence the examination
+                </p>
+              </div>
+              <div className="m-auto mt-9 w-full cursor-pointer h-[5vh]">
+                <button disabled={!ischecked} className=" disabled:bg-[#353757] bg-[#21234B]  w-full  h-16 rounded-xl leading-6 text-xl text-[#fff] font-bold size-5 ">
+                  Start Test
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
