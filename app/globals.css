@@ -17,3 +17,28 @@ Body{
 }
 
 
+.loader {
+    display: inline-flex;
+    gap: 15px;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    height: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(farthest-side,#000 95%,#0000) 40% 40%/10px 10px no-repeat
+      #fff;
+    transform: scaleX(var(--s,1)) rotate(0deg);
+    animation: l6 1s infinite linear;
+  }
+  .loader:after {
+    --s: -1;
+    animation-delay:-0.1s;
+  }
+  @keyframes l6 {
+    100% {transform:scaleX(var(--s,1)) rotate(360deg);}
+  }
+
+

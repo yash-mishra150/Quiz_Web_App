@@ -1,10 +1,10 @@
 import React from 'react'
-import Quiz from "../../components/quiz/Quiz.js"
+import Result from "../../components/Result and leaderboard/Result"
 
 const page = () => {
   return (
     <div>
-      <Quiz/>
+      <Result  />
     </div>
   )
 }
