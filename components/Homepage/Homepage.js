@@ -59,10 +59,11 @@ export default function Homepage() {
 
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
-            console.log(formData);
+            // const response = await axios.post("https://quiz-app-yl47.onrenpder.com/auth/otp/", formData);
+            // console.log(formData);
             let Email = formData.email;
-
+            let student = formData.student_no;
+            let Username = formData.username;
 
             toast.success("OTP generated successfully!");
             setTimeout(() => router.replace('/OTP'), 1000);
@@ -71,8 +72,8 @@ export default function Homepage() {
 
             // // Store the stringified FormData in local storage
             localStorage.setItem('email', Email);
-
-
+            // localStorage.setItem('student', student);
+            // localStorage.setItem('Username', Username);
             // window.location.href='/dashboard';
 
         } catch (err) {
@@ -85,13 +86,17 @@ export default function Homepage() {
             setLoading(false);
         }
         function saveFormData(formData) {
-            // Convert the formData object to a JSON string
-            const formDataJSON = JSON.stringify(formData);
-
+            // Create a new formData object without the 'captcha' key
+            const modifiedFormData = { ...formData };
+            delete modifiedFormData.captcha;
+        
+            // Convert the modified formData object to a JSON string
+            const formDataJSON = JSON.stringify(modifiedFormData);
+        
             // Store the JSON string in localStorage
             localStorage.setItem('formData', formDataJSON);
         }
-
+        
         // Example usage:
         // Assuming formData is an object containing form data
 
@@ -147,7 +152,7 @@ export default function Homepage() {
                         onChange={handleRecaptchaChange}
                         className='m-auto mb-5 text-center'
                     />
-                    <button className=" w-[310px] sm:w-[15rem] lg:w-[25rem] text-xl items-center m-auto px-8 py-4 font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-20 md:mb-10">
+                    <button className=" w-[310px] sm:w-[15rem] lg:w-[25rem] text-xl items-center m-auto px-8 py-4 font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-20 md:mb-5">
                         Send OTP
                     </button>
                 </form>

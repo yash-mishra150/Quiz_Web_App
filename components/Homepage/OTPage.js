@@ -116,7 +116,7 @@ export default function OTPage() {
         try
         {e.preventDefault();
         const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
-        toast.
+        toast.success("OTP resend successfull");
         // console.log(FormData);
         setTimerComplete(false);
         setSeconds(60);
