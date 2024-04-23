@@ -1,5 +1,6 @@
 import React from 'react'
-import Timer from "../../components/timer"
+import Timer from "../../components/quiz/timer";
+
 const page = () => {
   return (
     <div>
