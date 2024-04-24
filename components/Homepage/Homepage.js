@@ -114,9 +114,9 @@ export default function Homepage() {
             </section>
             <section className='m-auto mx-auto place-content-center'>
                 <Image className=' w-auto h-[15vh] lg:h-[15vh] m-auto' src={logo} alt="alt" />
-                <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
+                {/* <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
-                </h1>
+                </h1> */}
                 <h1 className=' text-sm sm:text-sm lg:text-xl font-bold text-[#21234B] text-center lg:mx-auto'> THINK | DEVELOP | DEPLOY</h1>
 
                 <Image className='w-[25vh] lg:w-auto m-auto mt-5' src={welcome} alt="alt" />
@@ -155,7 +155,7 @@ export default function Homepage() {
                         onChange={handleRecaptchaChange}
                         className='m-auto mb-5 text-center'
                     />
-                    <button className=" w-[310px] sm:w-[31vw] lg:w-[31vw] text-xl items-center m-auto px-8 py-4 font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-20">
+                    <button className=" w-[310px] sm:w-[31vw] lg:w-[31vw] text-lg items-center m-auto px-[8vw] py-[2vh] font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-[10vh]">
                         Send OTP
                     </button>
                 </form>
