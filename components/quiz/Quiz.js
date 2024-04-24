@@ -5,7 +5,7 @@ import Nimbus from "../../assests/NIMBUS FONT 2.svg";
 import CCC from "../../assests/CCC.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Result from "../../app/Result/page"
+import Result from "../../app/Result/page";
 
 
 
@@ -19,7 +19,7 @@ const Quiz = () => {
   // const initialTimer = localStorage.getItem("left") || 2 * 60;
   // const [timeLeft, setTimeLeft] = useState(Number(initialTimer));
   const [timeLeft, setTimeLeft] = useState(45*60)
-  
+  const router=useRouter();
   useEffect(() => {
   
     fetchData(count);
@@ -122,7 +122,7 @@ const Quiz = () => {
  
 
 if (quizEnded) {
-  const router=useRouter();
+  
   
   localStorage.setItem("score",score);
   router.replace("/Result")
