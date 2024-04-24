@@ -113,7 +113,7 @@ export default function Homepage() {
             </section>
             <section className='m-auto mx-auto place-content-center'>
                 <Image className='w-52 lg:w-64 m-auto' src={logo} alt="alt" />
-                <h1 className=' text-lg sm:text-xs lg:text-lg text-[#4E63CE] w-[20rem] sm:w-[25rem] lg:w-[38.5rem] text-center '>
+                <h1 className=' m-auto md:m-0 text-lg sm:text-xs lg:text-lg text-[#4E63CE] w-[20rem] sm:w-[25rem] lg:w-[38.5rem] text-center '>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
                     <span className=' text-xl sm:text-sm lg:text-xl font-bold text-[#21234B] mx-2 lg:mx-auto'> THINK | DEVELOP | DEPLOY</span>
                 </h1>
