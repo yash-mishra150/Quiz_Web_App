@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import title from '../../assests/title.svg';
 import HPV from '../../assests/Homepage_vector.svg';
 import logo from "../../assests/CCC_logo.svg";
@@ -104,22 +104,31 @@ export default function Homepage() {
 
         // Call the function to save the form data
         saveFormData(formData);
-
     }
+    // const [isVisible, setIsVisible] = useState(false);
+    // useEffect(()=>{ // Adjust this value to set the height threshold
+    //     if(window.scrollY > 600){
+    //         setIsVisible(true);
+    //     }else{
+    //         setIsVisible(false);
+    //     }
+    // },[]);
+
+
     return (
         <div className='overflow-x-hidden sm:flex justify-between'>
-            <section className='bg-[#21234B] h-[15rem] sm:h-fit w-screen sm:w-[40vw] lg:w-[40vw] place-content-center sm:p-10'>
+            <section className='bg-[#21234B] h-[15rem] sm:h-screen w-screen sm:w-[40vw] lg:w-[40vw] place-content-center sm:p-10'>
                 <Image className='bg-transparent mx-auto mt-[10vh] sm:mt-auto w-40 sm:w-[41vh] m-auto' src={title} alt="alt" />
                 <Image className='bg-transparent h-[61vh] m-auto sm:w-auto mt-5 sm:my-16' src={HPV} alt="alt" />
             </section>
             <section className='m-auto mx-auto place-content-center'>
                 <Image className=' w-auto h-[15vh] lg:h-[15vh] m-auto' src={logo} alt="alt" />
-                {/* <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
+                {/* <h1 className={` m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center ${isVisible ? `` : `hidden`}`}>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
                 </h1> */}
                 <h1 className=' text-sm sm:text-sm lg:text-xl font-bold text-[#21234B] text-center lg:mx-auto'> THINK | DEVELOP | DEPLOY</h1>
 
-                <Image className='w-[25vh] lg:w-auto m-auto mt-5' src={welcome} alt="alt" />
+                <Image className='h-[5vh] lg:h-[5vh] m-auto mt-5' src={welcome} alt="alt" />
                 <form className='flex flex-col my-5 sm:my-2' onSubmit={HandleSubmit}>
                     <input
                         type="text"
