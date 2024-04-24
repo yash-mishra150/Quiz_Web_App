@@ -17,7 +17,7 @@ export default function Homepage() {
         "username": "",
         "email": "",
         "student_no": "",
-        "captcha": ""
+        "recaptchaToken": ""
     });
     const [loading, setLoading] = useState(false);
     const onChange = (e) => {
@@ -26,7 +26,7 @@ export default function Homepage() {
     };
 
     const handleRecaptchaChange = (value) => {
-        formData.captcha = value;
+        formData.recaptchaToken = value;
     }
     const SITE_KEY = trim("6Lcd2CMpAAAAAKLqwdxjTgnWwzSgAGEgtl0BVOng");
     let router = useRouter();
@@ -89,14 +89,14 @@ export default function Homepage() {
             // Create a new formData object without the 'captcha' key
             const modifiedFormData = { ...formData };
             delete modifiedFormData.captcha;
-        
+
             // Convert the modified formData object to a JSON string
             const formDataJSON = JSON.stringify(modifiedFormData);
-        
+
             // Store the JSON string in localStorage
             localStorage.setItem('formData', formDataJSON);
         }
-        
+
         // Example usage:
         // Assuming formData is an object containing form data
 
@@ -113,10 +113,10 @@ export default function Homepage() {
             </section>
             <section className='m-auto mx-auto place-content-center'>
                 <Image className='w-52 lg:w-64 m-auto' src={logo} alt="alt" />
-                <h1 className=' m-auto md:m-0 text-lg sm:text-xs lg:text-lg text-[#4E63CE] w-[20rem] sm:w-[25rem] lg:w-[38.5rem] text-center '>
-                    Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
-                    <span className=' text-xl sm:text-sm lg:text-xl font-bold text-[#21234B] mx-2 lg:mx-auto'> THINK | DEVELOP | DEPLOY</span>
-                </h1>
+                <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[30vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
+                    Unleash Your Knowledge : Dive into the Ultimate Quiz Experience</h1>
+                <h1 className=' text-xl sm:text-sm lg:text-xl font-bold text-[#21234B] text-center lg:mx-auto'> THINK | DEVELOP | DEPLOY</h1>
+
                 <Image className='w-36 lg:w-auto m-auto mt-5 sm:my-5' src={welcome} alt="alt" />
                 <form className='flex flex-col my-5 sm:my-2' onSubmit={HandleSubmit}>
                     <input
@@ -134,7 +134,7 @@ export default function Homepage() {
                         autoComplete='off'
                         value={formData.student_no}
                         onChange={onChange}
-                        style={{"-moz-appearance": "textfield"}}
+                        style={{ "-moz-appearance": "textfield" }}
                         placeholder="Enter Student Number"
                         className="sm:w-[15rem] lg:w-[25rem] mb-4 text-xl font-semibold h-[3.5rem] lg:h-16 border m-auto bg-white border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
                     />

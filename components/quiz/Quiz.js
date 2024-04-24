@@ -180,7 +180,7 @@ if (quizEnded) {
                   {question.options.map((option, index) => (
                     <li
                       key={index}
-                      className=" h-fit pl-2 flex gap-2 w-[65vw] lg:w-[55vw] p-[1vh] rounded-xl"
+                      className=" bg-[#D9D9D9] h-fit pl-2 flex gap-2 w-[65vw] lg:w-[55vw] p-[1vh] rounded-xl"
                     >
                       <input
                         type="radio"
