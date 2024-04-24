@@ -6,7 +6,7 @@ import CCC from "../../assests/CCC.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Result from "../../app/Result/page";
-
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Quiz = () => {
@@ -98,6 +98,19 @@ const Quiz = () => {
       setLoading(false);
     }
   }
+  // class ErrorResponse {
+  //   constructor(errorObject) {
+  //     this.errorObject = errorObject;
+  //   }
+
+  //   getError() {
+  //     if (this.errorObject && this.errorObject.response && this.errorObject.response.data && 'error' in this.errorObject.response.data) {
+  //       return this.errorObject.response.data.error;
+  //     } else {
+  //       return null; // or handle the case where the error structure doesn't match expectations
+  //     }
+  //   }
+  // }
 
   const sentData = async (score, time_left, token) => {
     try {
@@ -113,9 +126,12 @@ const Quiz = () => {
           }
         }
       );
-      console.log("Score submitted successfully:");
+      // console.log("Score submitted successfully:");
     } catch (error) {
-      console.log("Error while submitting token and score", error);
+      // console.log("Error while submitting token and score", error);
+      // const errorResponse = new ErrorResponse(err)
+      // let errorMessage = errorResponse.getError();
+      // toast.error(errorMessage);
     }
   }
 
@@ -216,6 +232,7 @@ const Quiz = () => {
           </button>
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 };
