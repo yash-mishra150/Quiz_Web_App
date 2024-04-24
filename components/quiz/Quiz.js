@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Nimbus from "../assests/NIMBUS FONT 2.svg";
-import CCC from "../assests/CCC.svg";
+import Nimbus from "../../assests/NIMBUS FONT 2.svg";
+import CCC from "../../assests/CCC.svg";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Result from "../app/Result/page"
+import Result from "../../app/Result/page"
 
 
 
