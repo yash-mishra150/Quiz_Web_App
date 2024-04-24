@@ -108,18 +108,18 @@ export default function Homepage() {
     }
     return (
         <div className='overflow-x-hidden sm:flex justify-between'>
-            <section className='bg-[#21234B] h-[15rem] sm:h-screen w-screen sm:w-[30rem] lg:w-[40rem] place-content-center sm:p-10'>
-                <Image className='bg-transparent mx-auto mt-6 sm:mt-auto w-40 sm:w-[21rem] m-auto' src={title} alt="alt" />
-                <Image className='bg-transparent w-52 m-auto sm:w-auto mt-5 sm:my-16' src={HPV} alt="alt" />
+            <section className='bg-[#21234B] h-[15rem] sm:h-fit w-screen sm:w-[40vw] lg:w-[40vw] place-content-center sm:p-10'>
+                <Image className='bg-transparent mx-auto mt-[10vh] sm:mt-auto w-40 sm:w-[41vh] m-auto' src={title} alt="alt" />
+                <Image className='bg-transparent h-[61vh] m-auto sm:w-auto mt-5 sm:my-16' src={HPV} alt="alt" />
             </section>
             <section className='m-auto mx-auto place-content-center'>
-                <Image className='w-52 lg:w-64 m-auto' src={logo} alt="alt" />
+                <Image className=' w-auto h-[15vh] lg:h-[15vh] m-auto' src={logo} alt="alt" />
                 <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
                 </h1>
                 <h1 className=' text-sm sm:text-sm lg:text-xl font-bold text-[#21234B] text-center lg:mx-auto'> THINK | DEVELOP | DEPLOY</h1>
 
-                <Image className='w-36 lg:w-auto m-auto mt-5 sm:my-5' src={welcome} alt="alt" />
+                <Image className='w-[25vh] lg:w-auto m-auto mt-5' src={welcome} alt="alt" />
                 <form className='flex flex-col my-5 sm:my-2' onSubmit={HandleSubmit}>
                     <input
                         type="text"
@@ -128,7 +128,7 @@ export default function Homepage() {
                         value={formData.username}
                         onChange={onChange}
                         placeholder="Enter Name"
-                        className=" sm:w-[15rem] lg:w-[25rem] my-4 text-xl font-semibold h-[3.5rem] lg:h-16 m-auto border bg-white border-slate-200 rounded-lg py-3 px-5 "
+                        className=" w-[75vw] sm:w-[31vw] lg:w-[31vw] my-4 text-xl font-semibold h-[8vh] lg:h-[8vh] m-auto border bg-white border-slate-200 rounded-lg py-3 px-5 "
                     />
                     <input
                         type='number'
@@ -138,7 +138,7 @@ export default function Homepage() {
                         onChange={onChange}
                         style={{ "-moz-appearance": "textfield" }}
                         placeholder="Enter Student Number"
-                        className="sm:w-[15rem] lg:w-[25rem] mb-4 text-xl font-semibold h-[3.5rem] lg:h-16 border m-auto bg-white border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
+                        className=" w-[75vw] sm:w-[31vw] lg:w-[31vw] mb-4 text-xl font-semibold h-[8vh] lg:h-[8vh] border m-auto bg-white border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
                     />
                     <input
                         type="email"
@@ -147,7 +147,7 @@ export default function Homepage() {
                         value={formData.email}
                         onChange={onChange}
                         placeholder="Enter College Email"
-                        className="sm:w-[15rem] lg:w-[25rem] mb-4 text-xl font-semibold h-[3.5rem] lg:h-16 border m-auto bg-white border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
+                        className=" w-[75vw] sm:w-[31vw] lg:w-[31vw] mb-4 text-xl font-semibold h-[8vh] lg:h-[8vh] border m-auto bg-white border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
                     />
                     <ReCAPTCHA
                         ref={recaptcha}
@@ -155,7 +155,7 @@ export default function Homepage() {
                         onChange={handleRecaptchaChange}
                         className='m-auto mb-5 text-center'
                     />
-                    <button className=" w-[310px] sm:w-[15rem] lg:w-[25rem] text-xl items-center m-auto px-8 py-4 font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-20 md:mb-5">
+                    <button className=" w-[310px] sm:w-[31vw] lg:w-[31vw] text-xl items-center m-auto px-8 py-4 font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-20">
                         Send OTP
                     </button>
                 </form>
