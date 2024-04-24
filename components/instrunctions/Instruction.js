@@ -24,9 +24,9 @@ const Instruction = () => {
         <Image className='bg-transparent w-52 m-auto sm:w-auto mt-5 sm:my-16' src={mid} alt="alt" />
       </section>
       <section className='m-auto mx-auto place-content-center'>
-        <div className=" mt-20 sm:w-[45vh] md:w-[48vh] lg:w-[50vw] mx-5 flex flex-col items-center">
+        <div className=" mt-20 md:mt-0 sm:w-[45vh] md:w-[48vh] lg:w-[50vw] mx-5 flex flex-col items-center">
           <div className="">
-          <Image className='w-52 -mt-10 lg:w-64 m-auto' src={logo} alt="alt" />
+          <Image className='w-52 -mt-10 lg:w-64' src={logo} alt="alt" />
           </div>
           <div className=" mx-auto flex flex-col items-center gap-2 sm:gap-8">
             <h1 className=" sm:my-3 font-extrabold text-[#000] sm:leading-7 sm:text-[2.3vw]">

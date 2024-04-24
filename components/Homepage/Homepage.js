@@ -59,7 +59,7 @@ export default function Homepage() {
 
             e.preventDefault();
             setLoading(true);
-            // const response = await axios.post("https://quiz-app-yl47.onrenpder.com/auth/otp/", formData);
+            const response = await axios.post("https://quiz-app-yl47.onrenpder.com/auth/otp/", formData);
             // console.log(formData);
             let Email = formData.email;
             let student = formData.student_no;
@@ -113,7 +113,7 @@ export default function Homepage() {
             </section>
             <section className='m-auto mx-auto place-content-center'>
                 <Image className='w-52 lg:w-64 m-auto' src={logo} alt="alt" />
-                <h1 className=' m-auto text-lg sm:text-xs lg:text-lg text-[#4E63CE] w-[20rem] sm:w-[25rem] lg:w-[38.5rem] text-center leading-8'>
+                <h1 className=' text-lg sm:text-xs lg:text-lg text-[#4E63CE] w-[20rem] sm:w-[25rem] lg:w-[38.5rem] text-center '>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
                     <span className=' text-xl sm:text-sm lg:text-xl font-bold text-[#21234B] mx-2 lg:mx-auto'> THINK | DEVELOP | DEPLOY</span>
                 </h1>
@@ -134,6 +134,7 @@ export default function Homepage() {
                         autoComplete='off'
                         value={formData.student_no}
                         onChange={onChange}
+                        style={{"-moz-appearance": "textfield"}}
                         placeholder="Enter Student Number"
                         className="sm:w-[15rem] lg:w-[25rem] mb-4 text-xl font-semibold h-[3.5rem] lg:h-16 border m-auto bg-white border-slate-200 rounded-lg py-3 px-5 outline-none	bg-transparent"
                     />
