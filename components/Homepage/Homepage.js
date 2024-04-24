@@ -113,9 +113,10 @@ export default function Homepage() {
             </section>
             <section className='m-auto mx-auto place-content-center'>
                 <Image className='w-52 lg:w-64 m-auto' src={logo} alt="alt" />
-                <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[30vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
-                    Unleash Your Knowledge : Dive into the Ultimate Quiz Experience</h1>
-                <h1 className=' text-xl sm:text-sm lg:text-xl font-bold text-[#21234B] text-center lg:mx-auto'> THINK | DEVELOP | DEPLOY</h1>
+                <h1 className=' m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center '>
+                    Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
+                </h1>
+                <h1 className=' text-sm sm:text-sm lg:text-xl font-bold text-[#21234B] text-center lg:mx-auto'> THINK | DEVELOP | DEPLOY</h1>
 
                 <Image className='w-36 lg:w-auto m-auto mt-5 sm:my-5' src={welcome} alt="alt" />
                 <form className='flex flex-col my-5 sm:my-2' onSubmit={HandleSubmit}>

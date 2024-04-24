@@ -206,7 +206,7 @@ if (quizEnded) {
         <div className="mt-[5vh] ml-auto">
           <button
             className="bg-[#21234B] lg:w-[16vw] w-[30vw] h-[6vh]
-            rounded-xl text-[#fff] lg:text-[2.2vh] md:text-[1.8vw] text-[1.5vh]"
+            rounded-xl text-[#fff] lg:text-[2.2vh] md:text-[1.8vw] text-[1.5vh] mb-3"
             onClick={clickHandler}
           >
             Save & Next
