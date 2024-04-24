@@ -59,7 +59,7 @@ export default function Homepage() {
 
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("https://quiz-app-yl47.onrenpder.com/auth/otp/", formData);
+            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
             // console.log(formData);
             let Email = formData.email;
             let student = formData.student_no;
