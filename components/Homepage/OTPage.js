@@ -13,6 +13,7 @@ export default function OTPage() {
     const [otp, setotp] = useState({
         "otp": ""
     });
+    const [token ,setToken] = useState("");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [FormData, setFormData] = useState({
@@ -38,8 +39,11 @@ export default function OTPage() {
             const formDataJSON = localStorage.getItem('formData');
             const formData = JSON.parse(formDataJSON);
             setFormData(formData);
+
+            localStorage.setItem('token', token);
+
         }
-    }, []);
+    }, [token]);
     // let Email = getItemFromLocalStorage('email');
 
 
@@ -78,10 +82,11 @@ export default function OTPage() {
         try {
             e.preventDefault();
             setLoading(true);
-            // const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
-            console.log(response);
+            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
+            // console.log(response);
+            setToken(response.data.token.access);
             toast.success('User created successfully!');
-            // setTimeout(() => { router.push("/instruction") }, 1000);
+            setTimeout(() => { router.push("/instruction") }, 1000);
 
             // window.location.href='/dashboard';
 

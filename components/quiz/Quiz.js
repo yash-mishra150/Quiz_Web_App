@@ -18,10 +18,10 @@ const Quiz = () => {
   const [loading, setLoading] = useState(true);
   // const initialTimer = localStorage.getItem("left") || 2 * 60;
   // const [timeLeft, setTimeLeft] = useState(Number(initialTimer));
-  const [timeLeft, setTimeLeft] = useState(45*60)
-  const router=useRouter();
+  const [timeLeft, setTimeLeft] = useState(45 * 60)
+  const router = useRouter();
   useEffect(() => {
-  
+
     fetchData(count);
   }, [count]);
 
@@ -54,33 +54,34 @@ const Quiz = () => {
   useEffect(() => {
 
     if (quizEnded) return;
-  
-  
+
+
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime === 0) {
           clearInterval(timer);
           endHandler();
-          localStorage.setItem("left", 1*60)
+          localStorage.setItem("left", 1 * 60)
           return 0;
         }
         return prevTime - 1;
       });
     }, 1000);
-  
-    
+
+
     return () => clearInterval(timer);
   }, [quizEnded]);
-  
+
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
+  const [Token, setToken] = useState("");
 
-  
   useEffect(() => {
-    localStorage.setItem("left", timeLeft); 
+    localStorage.setItem("left", timeLeft);
+    setToken(localStorage.getItem('token'));
   }, [timeLeft]);
 
 
@@ -104,7 +105,7 @@ const Quiz = () => {
         'https://quiz-app-yl47.onrender.com/api/score/',
         {
           score: score,
-          time_taken: time_left
+          time_taken: timeLeft
         },
         {
           headers: {
@@ -117,19 +118,21 @@ const Quiz = () => {
       console.log("Error while submitting token and score", error);
     }
   }
-  
 
- 
 
-if (quizEnded) {
-  
-  
-  localStorage.setItem("score",score);
-  router.replace("/Result")
-  return null; 
 
- 
-}
+
+  if (quizEnded) {
+
+
+    localStorage.setItem("score", score);
+    router.replace("/Result")
+    sentData(score, timeLeft, Token);
+    return null;
+
+
+
+  }
 
   return (
     <div className="flex h-[100vh] overflow-x-hidden">
@@ -145,7 +148,7 @@ if (quizEnded) {
           <div className="bg-[#21234B] lg:w-[16vw] w-[25vw] h-full rounded-xl text-[#fff] lg:text-[2.2vh] md:text-[1.8vw] text-[1.5vh] animate-bounce">
             <p className=" bg-transparent w-fit  mx-auto">Time Left:</p>
             <p className=" bg-transparent  font-medium w-fit mx-auto">
-                  {formatTime(timeLeft)}
+              {formatTime(timeLeft)}
 
             </p>
           </div>
@@ -158,50 +161,50 @@ if (quizEnded) {
             </button>
           </div>
         </div>
-        
-        <div className=" lg:h-[58vh] h-fit bg-[#F2F3F5] mt-[5vh] shadow-xl">
-  {loading ? (<div className="loader bg-transparent  lg:mx-[40vw] lg:mt-[20vh] mx-[30vw]"></div>):
-         ( data &&
-            data.map((question) => (
-              <div key={question.id} className="bg-transparent ml-10">
-                <div className=" bg-transparent flex justify-between mt-10">
-                  <h3 className="bg-transparent lg:text-2xl text-xl font-bold lg:font-normal">
-                    {question.question}
-                  </h3>
-                  <h1 className=" bg-transparent mr-[7vw] font-medium text-xl">
-                    <span className=" bg-transparent ml-2 text-3xl lg:text-4xl">
-                      {count-7}
-                    </span>
-                    /40
-                  </h1>
-                </div>
 
-                <ul className="bg-transparent lg:h-[30vh] h-fit mb-[3vh] lg:mb-0  w-fit mt-5 flex flex-col gap-[3vh] rounded-2xl">
-                  {question.options.map((option, index) => (
-                    <li
-                      key={index}
-                      className=" bg-[#D9D9D9] h-fit pl-2 flex gap-2 w-[65vw] lg:w-[55vw] p-[1vh] rounded-xl"
-                    >
-                      <input
-                        type="radio"
-                        id={`${question.id}-${index}`}
-                        name={`question-${question.id}`}
-                        value={option}
-                        onChange={() => handleAnswerSelect(question.id, option)}
-                        checked={selectedAnswers[question.id] === option}
-                        className=" lg:w-[1vw] w-[4vw]"
-                      />
-                      <label
-                        htmlFor={`${question.id}-${index}`}
-                        className=" pt-1 font-medium w-full"
+        <div className=" lg:h-[58vh] h-fit bg-[#F2F3F5] mt-[5vh] shadow-xl">
+          {loading ? (<div className="loader bg-transparent  lg:mx-[40vw] lg:mt-[20vh] mx-[30vw]"></div>) :
+            (data &&
+              data.map((question) => (
+                <div key={question.id} className="bg-transparent ml-10">
+                  <div className=" bg-transparent flex justify-between mt-10">
+                    <h3 className="bg-transparent lg:text-2xl text-xl font-bold lg:font-normal">
+                      {question.question}
+                    </h3>
+                    <h1 className=" bg-transparent mr-[7vw] font-medium text-xl">
+                      <span className=" bg-transparent ml-2 text-3xl lg:text-4xl">
+                        {count - 7}
+                      </span>
+                      /40
+                    </h1>
+                  </div>
+
+                  <ul className="bg-transparent lg:h-[30vh] h-fit mb-[3vh] lg:mb-0  w-fit mt-5 flex flex-col gap-[3vh] rounded-2xl">
+                    {question.options.map((option, index) => (
+                      <li
+                        key={index}
+                        className=" bg-[#D9D9D9] h-fit pl-2 flex gap-2 w-[65vw] lg:w-[55vw] p-[1vh] rounded-xl"
                       >
-                        {option}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )) ) }
+                        <input
+                          type="radio"
+                          id={`${question.id}-${index}`}
+                          name={`question-${question.id}`}
+                          value={option}
+                          onChange={() => handleAnswerSelect(question.id, option)}
+                          checked={selectedAnswers[question.id] === option}
+                          className=" lg:w-[1vw] w-[4vw]"
+                        />
+                        <label
+                          htmlFor={`${question.id}-${index}`}
+                          className=" pt-1 font-medium w-full"
+                        >
+                          {option}
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )))}
         </div>
         <div className="mt-[5vh] ml-auto">
           <button
