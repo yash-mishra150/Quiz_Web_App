@@ -26,7 +26,7 @@ export default function Homepage() {
     };
 
     const handleRecaptchaChange = (value) => {
-        formData.recaptchaToken = value;
+        formData.recaptchaToken = trim(value);
     }
     const SITE_KEY = trim("6Lcd2CMpAAAAAKLqwdxjTgnWwzSgAGEgtl0BVOng");
     let router = useRouter();
@@ -36,8 +36,8 @@ export default function Homepage() {
         }
 
         getError() {
-            if (this.errorObject && this.errorObject.response && this.errorObject.response.data && 'errors' in this.errorObject.response.data) {
-                return this.errorObject.response.data.errors;
+            if (this.errorObject && this.errorObject.response && this.errorObject.response.data && 'error' in this.errorObject.response.data) {
+                return this.errorObject.response.data.error;
             }
         }
     }
@@ -47,6 +47,7 @@ export default function Homepage() {
             recaptcha.current.reset();
             const emailRegex = /^[a-zA-Z]+(22|23)\d{5,6}@akgec\.ac\.in$/;
             const nameRegex = /^[a-zA-Z\s]*$/;
+
             const studentNumberRegex = /^(22|23)\d{5,6}$/;
             if (!formData.email || !formData.username) throw toast.error("Please fill out all fields");
             else if (!nameRegex.test(formData.username.trim())) throw toast.error("Name cannot contain numbers");
