@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 
+
+
 export default function OTPage() {
     const [otp, setotp] = useState({
         "otp": ""
@@ -142,12 +144,12 @@ export default function OTPage() {
     async function handleResend(e) {
         try {
             e.preventDefault();
-            const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
+            // const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
             toast.success("OTP resend successfull");
             // console.log(FormData);
             setTimerComplete(false);
             resetTimer()
-            
+
         }
         catch (err) {
             const errorResponse = new ErrorResponse(err)
@@ -155,40 +157,41 @@ export default function OTPage() {
             toast.error(errorMessage);
         }
     }
-    const initialSeconds = localStorage.getItem('timerSeconds') ? parseInt(localStorage.getItem('timerSeconds'), 10) : 60;
-    const [seconds, setSeconds] = useState(initialSeconds);
+    const [seconds, setSeconds] = useState(null);
     const [timerComplete, setTimerComplete] = useState(false);
 
     useEffect(() => {
+        const initialSeconds = localStorage.getItem('timerSeconds');
+        const initialSecondsValue = initialSeconds ? parseInt(initialSeconds, 10) : 60;
+        setSeconds(initialSecondsValue);
+
         const intervalId = setInterval(() => {
             if (seconds > 0) {
                 setSeconds(prevSeconds => {
-                    // Store current value in local storage
                     localStorage.setItem('timerSeconds', (prevSeconds - 1).toString());
-                    return prevSeconds - 1; // Decrease seconds by 1
+                    return prevSeconds - 1;
                 });
             } else {
-                clearInterval(intervalId); // Stop the timer when seconds reach 0
-                setTimerComplete(true); // Set timerComplete to true when timer finishes
+                clearInterval(intervalId);
+                setTimerComplete(true);
             }
-        }, 1000); // Update every second
+        }, 1000);
 
         return () => clearInterval(intervalId);
     }, [seconds]);
 
     const resetTimer = () => {
-        // Reset the timer to its initial value (60 seconds)
         setSeconds(60);
-        // Update local storage
         localStorage.setItem('timerSeconds', '60');
-        // Ensure timerComplete is set to false
         setTimerComplete(false);
     };
 
+    if (seconds === null) {
+        return null; // or loading indicator if desired
+    }
+
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-
-
     return (
         <>
             <div className='overflow-x-hidden sm:flex justify-between'>
@@ -222,7 +225,7 @@ export default function OTPage() {
                             ))}
 
                         </div>
-                        <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleResend} disabled={!timerComplete}  className='font-bold disabled:text-[#4c5896] mr-1'>Resend</button>{minutes}:{remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds}</h1>
+                        <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleResend} disabled={!timerComplete} className='font-bold disabled:text-[#4c5896] mr-1'>Resend</button>{minutes}:{remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds}</h1>
                         <div className='flex justify-center'>
                             <button className="  w-[310px] mt-[20vh]  sm:w-[31vw] lg:w-[31vw] text-lg items-center m-auto px-[8vw] py-[2vh] font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-[10vh]">
                                 Confirm
