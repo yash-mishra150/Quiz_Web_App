@@ -2,11 +2,17 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-const YourPage = () => {
+
+const YourPage = (handleResend) => {
     const [seconds, setSeconds] = useState(() => {
         // Initialize from local storage if available, otherwise default to 60 seconds
-        const storedSeconds = localStorage.getItem('timerSeconds');
-        return storedSeconds ? parseInt(storedSeconds, 10) : 60;
+        if (typeof window !== 'undefined') {
+            // Perform localStorage action
+            const storedSeconds = localStorage.getItem('timerSeconds');
+            return storedSeconds ? parseInt(storedSeconds, 10) : 60;
+        }
+
+
     });
     const [timerComplete, setTimerComplete] = useState(false);
 
@@ -29,19 +35,23 @@ const YourPage = () => {
 
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    function handleSubmit(e){
-      console.log("log")
+    function handleSubmit(e) {
+        e.preventDefault();
+        setSeconds(60);
+        setTimerComplete(false);
     }
 
     return (
         <div>
-            <h1>Your Page</h1>
+            {/* <h1>Your Page</h1>
             <p>Timer: {minutes < 10 ? '0' : ''}{minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}</p>
-            {timerComplete && 
+            {timerComplete &&
                 <button onClick={handleSubmit}>
                     <a>Go to Destination Page</a>
                 </button>
-            }
+
+            } */}
+            <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleSubmit} disabled={timerComplete} className='font-bold disabled:text-[#4c5896] mr-1'>Resend</button>{minutes < 10 ? '0' : ''}{minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}</h1>
         </div>
     );
 };
