@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import ReCAPTCHA from "react-google-recaptcha";
 import trim from "lodash/trim";
+import { serialize } from 'cookie';
 
 export default function Homepage() {
     const recaptcha = useRef();
@@ -60,7 +61,7 @@ export default function Homepage() {
 
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
+            // const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
             // console.log(response);
             let Email = formData.email;
             let student = formData.student_no;
@@ -72,7 +73,10 @@ export default function Homepage() {
             // const formDataString = JSON.stringify(Array.from(formData.entries()));
 
             // // Store the stringified FormData in local storage
-            localStorage.setItem('email', Email);
+            document.cookie = serialize('email', Email, {
+                maxAge: 604800, // 1 week
+                path: '/',
+            });
             // localStorage.setItem('student', student);
             // localStorage.setItem('Username', Username);
             // window.location.href='/dashboard';
@@ -89,14 +93,15 @@ export default function Homepage() {
         function saveFormData(formData) {
             // Create a new formData object without the 'captcha' key
             const modifiedFormData = { ...formData };
-            delete modifiedFormData.captcha;
-
+            delete modifiedFormData.recaptchaToken;
+        
             // Convert the modified formData object to a JSON string
             const formDataJSON = JSON.stringify(modifiedFormData);
-
-            // Store the JSON string in localStorage
-            localStorage.setItem('formData', formDataJSON);
+        
+            // Store the JSON string in a cookie
+            document.cookie = `formData=${encodeURIComponent(formDataJSON)}; max-age=604800; path=/`;
         }
+        
 
         // Example usage:
         // Assuming formData is an object containing form data
@@ -119,10 +124,10 @@ export default function Homepage() {
         <div className='overflow-x-hidden sm:flex justify-between'>
             <section className='bg-[#21234B] h-[35vh] sm:h-screen w-screen sm:w-[40vw] lg:w-[40vw] place-content-center sm:p-10'>
                 <Image className='bg-transparent mx-auto mt-[3vh] sm:mt-auto w-[35vw] sm:w-[41vh] m-auto' src={title} alt="alt" />
-                <Image className='bg-transparent h-[30vh] sm:h-[61vh] m-auto sm:w-auto mt-[2vh] sm:my-16' src={HPV} alt="alt" />
+                <Image className='bg-transparent h-[30vh] sm:h-[61vh] m-auto  sm:w-auto mt-[2vh] sm:my-16' src={HPV} alt="alt" />
             </section>
-            <section className='m-auto md:mt-0 mx-auto place-content-center'>
-                <Image className=' sm: w-auto h-[15vh] lg:h-[15vh] m-auto' src={logo} alt="alt" />
+            <section className='m-auto mx-auto content-center'>
+                <Image className='w-auto h-[15vh] lg:h-[15vh] m-auto' src={logo} alt="alt" />
                 {/* <h1 className={` m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center ${isVisible ? `` : `hidden`}`}>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
                 </h1> */}

@@ -13,7 +13,7 @@ export default function OTPage() {
     const [otp, setotp] = useState({
         "otp": ""
     });
-    const [token ,setToken] = useState("");
+    const [token, setToken] = useState("");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [FormData, setFormData] = useState({
@@ -26,23 +26,45 @@ export default function OTPage() {
     // setemail(localStorage.getItem('Email'));
 
     const [data, setData] = useState('');
+    useEffect(() => {
+        // Function to read the email from the cookie
+        const getEmailFromCookie = () => {
+            const emailCookie = decodeURIComponent(document.cookie)
+                .split('; ')
+                .find(row => row.startsWith('email='));
+            const extractedEmail = emailCookie ? emailCookie.split('=')[1] : null;
+            return extractedEmail;
+        };
+
+        // Set email state with the value read from the cookie
+        setData(getEmailFromCookie());
+    }, []); // Empty dependency array to run only once on mount
+
 
     useEffect(() => {
         // Check if window is defined (i.e., if code is running on the client side)
-        if (typeof window !== 'undefined') {
-            // Access localStorage here
-            const storedData = localStorage.getItem('email');
-            if (storedData) {
-                setData(storedData);
+
+        // Access localStorage here
+        function getFormData() {
+            // Get the cookie value
+            const cookie = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('formData='));
+
+            // If the cookie exists, extract the formDataJSON string and decode it
+            if (cookie) {
+                const formDataJSON = decodeURIComponent(cookie.split('=')[1]);
+                // Parse the JSON string back into an object
+                return JSON.parse(formDataJSON);
+            } else {
+                return null; // Return null if the cookie doesn't exist
             }
-
-            const formDataJSON = localStorage.getItem('formData');
-            const formData = JSON.parse(formDataJSON);
-            setFormData(formData);
-
-            localStorage.setItem('token', token);
-
         }
+
+        setFormData(getFormData());
+        localStorage.setItem('token', token);
+
+
     }, [token]);
     // let Email = getItemFromLocalStorage('email');
 
@@ -118,19 +140,19 @@ export default function OTPage() {
     // Call the function to retrieve the form data
     // const formData = getFormData();
     async function handleResend(e) {
-        try
-        {e.preventDefault();
-        const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
-        toast.success("OTP resend successfull");
-        // console.log(FormData);
-        setTimerComplete(false);
-        setSeconds(60);
-    }
-    catch (err) {
-        const errorResponse = new ErrorResponse(err)
-        let errorMessage = errorResponse.getError();
-        toast.error(errorMessage);
-    }
+        try {
+            e.preventDefault();
+            // const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
+            // toast.success("OTP resend successfull");
+            console.log(FormData);
+            setTimerComplete(false);
+            setSeconds(60);
+        }
+        catch (err) {
+            const errorResponse = new ErrorResponse(err)
+            let errorMessage = errorResponse.getError();
+            toast.error(errorMessage);
+        }
     }
     // Now you can use the formData object as needed
     // console.log(formData);
@@ -161,14 +183,14 @@ export default function OTPage() {
 
     return (
         <>
-            <div className='overflow-x-hidden md:flex justify-between'>
-                <section className='bg-[#21234B] h-[20.5rem] md:h-screen w-screen md:w-[30rem] lg:w-[40rem] place-content-center md:p-16'>
-                    <Image className='bg-transparent mx-auto mt-5 md:mt-auto w-48 md:w-[21rem] m-auto' src={title} alt="alt" />
-                    <Image className='bg-transparent w-64 m-auto md:w-auto mt-3 md:my-16 drop-shadow-2xl' src={OPV} alt="alt" />
+            <div className='overflow-x-hidden sm:flex justify-between'>
+                <section className='bg-[#21234B] h-[35vh] sm:h-screen w-screen sm:w-[50vw] lg:w-[40vw] place-content-center sm:p-10'>
+                    <Image className='bg-transparent mx-auto mt-[3vh] sm:mt-auto w-[35vw] sm:w-[41vh] m-auto' src={title} alt="alt" />
+                    <Image className='bg-transparent h-[30vh] sm:h-[61vh] m-auto sm:w-auto mt-[2vh] sm:my-[10vh]' src={OPV} alt="alt" />
                 </section>
                 <section className="md:block flex justify-center flex-col  m-auto mt-10 md:mt-auto md:mx-auto place-content-center">
                     <div className='mt-5 md:mt-0 leading-10'>
-                        <span className=' text-xl md:text-2xl lg:text-5xl font-bold text-[#21234B] w-[20rem] md:w-[25rem] lg:w-[20rem] ml-[5vh] md:mx-10'>
+                        <span className=' text-xl md:text-[7vh] lg:text-[7vh] font-bold text-[#21234B] w-[20rem] md:w-[25rem] lg:w-[20rem] ml-[5vh] md:mx-10'>
                             Enter OTP
                         </span>
                         <h1 className='ml-[5vh] md:ml-[3rem] text-sm md:text-xs lg:text-md text-[#4E63CE]'>sent on <span className='font-bold'>{data}</span></h1>
@@ -183,8 +205,7 @@ export default function OTPage() {
                                     name="Otp"
                                     placeholder="_"
                                     autoComplete='off'
-
-                                    className=" w-[2.5rem] h-[2.5rem] sm:w-[3rem] sm:h-[3rem] text-black text-sm md:text-2xl p-3 pl-4 sm:pl-[1.1rem] rounded-lg outline-none font-bold bg-white"
+                                    className=" w-[10vw] h-[10vw] sm:w-[8vh] sm:h-[8vh] text-black text-[5vw] sm:text-[3.5vh] p-[3.5vw] sm:p-[3vh] rounded-lg outline-none font-bold bg-white"
                                     key={index}
                                     ref={(input) => (inputRefs.current[index] = input)}
                                     onChange={(event) => onChange(index, event)}
@@ -193,9 +214,9 @@ export default function OTPage() {
                             ))}
 
                         </div>
-                        <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleResend} disabled={!timerComplete}  className='font-bold disabled:text-[#4c5896]'>Resend</button> {minutes < 10 ? '0' : ''}{minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}</h1>
+                        <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleResend} disabled={!timerComplete} className='font-bold disabled:text-[#4c5896]'>Resend</button> {minutes < 10 ? '0' : ''}{minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}</h1>
                         <div className='flex justify-center'>
-                            <button className=" mt-20 md:mt-36 w-[310px] md:w-[15rem] lg:w-[25rem] text-2xl items-center m-auto px-8 py-4  font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-20">
+                            <button className="  w-[310px] mt-[20vh]  sm:w-[31vw] lg:w-[31vw] text-lg items-center m-auto px-[8vw] py-[2vh] font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-[10vh]">
                                 Confirm
                             </button>
                         </div>
