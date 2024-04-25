@@ -61,7 +61,7 @@ export default function Homepage() {
 
             e.preventDefault();
             setLoading(true);
-            // const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
+            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
             // console.log(response);
             let Email = formData.email;
             let student = formData.student_no;
@@ -142,7 +142,7 @@ export default function Homepage() {
                         value={formData.username}
                         onChange={onChange}
                         placeholder="Enter Name"
-                        className=" w-[75vw] sm:w-[31vw] lg:w-[31vw] my-4 text-xl font-semibold h-[8vh] lg:h-[8vh] m-auto border bg-white border-slate-200 rounded-lg py-3 px-5 "
+                        className=" w-[75vw] sm:w-[31vw] outline-none lg:w-[31vw] my-4 text-xl font-semibold h-[8vh] lg:h-[8vh] m-auto border bg-white border-slate-200 rounded-lg py-3 px-5 "
                     />
                     <input
                         type='number'
