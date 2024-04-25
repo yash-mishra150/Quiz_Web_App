@@ -151,14 +151,17 @@ export default function OTPage() {
             const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
             toast.success("OTP resend successfull");
             // console.log(FormData);
-            setSeconds(60);
-            setTimerComplete(false);
+            
 
         }
         catch (err) {
             const errorResponse = new ErrorResponse(err)
             let errorMessage = errorResponse.getError();
             toast.error(errorMessage);
+        }
+        finally{
+            setSeconds(60);
+            setTimerComplete(false);
         }
     }
     const [seconds, setSeconds] = useState(() => {
