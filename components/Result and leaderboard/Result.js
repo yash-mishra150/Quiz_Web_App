@@ -51,7 +51,7 @@ const Result = () => {
             </p>
             <div className="lg:w-[45vw] w-[70vw] bg-[#D9D9D9] lg:h-[40vh] h-[30vh] rounded-xl font-medium shadow-xl">
                   
-                 <div className=' bg-transparent lg:w-[20vw] mx-[9vw] mt-2 lg:mx-[16vw] text-2xl font-bold '>Your Score : {score}</div>
+                 <div className=' bg-transparent lg:w-[20vw] mx-[9vw] mt-2 lg:mx-[16vw] text-xl font-bold '>Your Score : {score}</div>
                   <div className=' bg-transparent flex mt-[3vh] justify-evenly lg:w-[20vw] lg:h-[3vw] mx-auto'> 
                   <FaGithub className=" text-3xl bg-transparent select-none"/>
                   <FaReact className=' text-3xl bg-transparent select-none'/>

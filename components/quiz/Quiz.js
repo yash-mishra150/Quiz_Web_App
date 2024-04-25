@@ -178,7 +178,7 @@ const Quiz = () => {
           </div>
         </div>
 
-        <div className=" lg:h-[58vh] h-fit bg-[#F2F3F5] mt-[5vh] shadow-xl">
+        <div className=" lg:min-h-[58vh] h-fit bg-[#F2F3F5] mt-[5vh] shadow-xl">
           {loading ? (<div className="loader bg-transparent  lg:mx-[40vw] lg:mt-[20vh] mx-[30vw]"></div>) :
             (data &&
               data.map((question) => (

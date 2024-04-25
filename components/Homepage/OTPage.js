@@ -142,11 +142,12 @@ export default function OTPage() {
     async function handleResend(e) {
         try {
             e.preventDefault();
-            // const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
-            // toast.success("OTP resend successfull");
-            console.log(FormData);
+            const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
+            toast.success("OTP resend successfull");
+            // console.log(FormData);
             setTimerComplete(false);
-            setSeconds(60);
+            resetTimer()
+            
         }
         catch (err) {
             const errorResponse = new ErrorResponse(err)
@@ -154,16 +155,18 @@ export default function OTPage() {
             toast.error(errorMessage);
         }
     }
-    // Now you can use the formData object as needed
-    // console.log(formData);
-
-    const [seconds, setSeconds] = useState(60);
+    const initialSeconds = localStorage.getItem('timerSeconds') ? parseInt(localStorage.getItem('timerSeconds'), 10) : 60;
+    const [seconds, setSeconds] = useState(initialSeconds);
     const [timerComplete, setTimerComplete] = useState(false);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
             if (seconds > 0) {
-                setSeconds(prevSeconds => prevSeconds - 1); // Decrease seconds by 1
+                setSeconds(prevSeconds => {
+                    // Store current value in local storage
+                    localStorage.setItem('timerSeconds', (prevSeconds - 1).toString());
+                    return prevSeconds - 1; // Decrease seconds by 1
+                });
             } else {
                 clearInterval(intervalId); // Stop the timer when seconds reach 0
                 setTimerComplete(true); // Set timerComplete to true when timer finishes
@@ -173,12 +176,17 @@ export default function OTPage() {
         return () => clearInterval(intervalId);
     }, [seconds]);
 
+    const resetTimer = () => {
+        // Reset the timer to its initial value (60 seconds)
+        setSeconds(60);
+        // Update local storage
+        localStorage.setItem('timerSeconds', '60');
+        // Ensure timerComplete is set to false
+        setTimerComplete(false);
+    };
+
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-
-    // function handleSubmit(e){
-    //   console.log("log")
-    // }
 
 
     return (
@@ -214,7 +222,7 @@ export default function OTPage() {
                             ))}
 
                         </div>
-                        <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleResend} disabled={!timerComplete} className='font-bold disabled:text-[#4c5896]'>Resend</button> {minutes < 10 ? '0' : ''}{minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}</h1>
+                        <h1 className='md:ml-2 mt-10 text-sm md:text-xs lg:text-md text-[#4E63CE]'>Didn&apos;t Received? <button onClick={handleResend} disabled={!timerComplete}  className='font-bold disabled:text-[#4c5896] mr-1'>Resend</button>{minutes}:{remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds}</h1>
                         <div className='flex justify-center'>
                             <button className="  w-[310px] mt-[20vh]  sm:w-[31vw] lg:w-[31vw] text-lg items-center m-auto px-[8vw] py-[2vh] font-semibold tracking-wide text-white bg-[#21234B] rounded-lg h-[10vh]">
                                 Confirm

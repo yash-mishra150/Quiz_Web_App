@@ -74,7 +74,7 @@ export default function Homepage() {
 
             // // Store the stringified FormData in local storage
             document.cookie = serialize('email', Email, {
-                maxAge: 604800, // 1 week
+                maxAge: 7200, // 2 hrs
                 path: '/',
             });
             // localStorage.setItem('student', student);
@@ -99,7 +99,7 @@ export default function Homepage() {
             const formDataJSON = JSON.stringify(modifiedFormData);
         
             // Store the JSON string in a cookie
-            document.cookie = `formData=${encodeURIComponent(formDataJSON)}; max-age=604800; path=/`;
+            document.cookie = `formData=${encodeURIComponent(formDataJSON)}; max-age=7200; path=/`;
         }
         
 
