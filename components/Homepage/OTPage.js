@@ -161,16 +161,20 @@ export default function OTPage() {
     const [timerComplete, setTimerComplete] = useState(false);
 
     useEffect(() => {
-        const initialSeconds = localStorage.getItem('timerSeconds');
-        const initialSecondsValue = initialSeconds ? parseInt(initialSeconds, 10) : 60;
-        setSeconds(initialSecondsValue);
-
+        if (typeof window !== 'undefined') {
+            const initialSeconds = localStorage.getItem('timerSeconds');
+            const initialSecondsValue = initialSeconds ? parseInt(initialSeconds, 10) : 60;
+            setSeconds(initialSecondsValue);
+        }
         const intervalId = setInterval(() => {
             if (seconds > 0) {
-                setSeconds(prevSeconds => {
-                    localStorage.setItem('timerSeconds', (prevSeconds - 1).toString());
-                    return prevSeconds - 1;
-                });
+                if (typeof window !== 'undefined') {
+                    setSeconds(prevSeconds => {
+                        localStorage.setItem('timerSeconds', (prevSeconds - 1).toString());
+                        return prevSeconds - 1;
+
+                    });
+                }
             } else {
                 clearInterval(intervalId);
                 setTimerComplete(true);
@@ -181,9 +185,11 @@ export default function OTPage() {
     }, [seconds]);
 
     const resetTimer = () => {
-        setSeconds(60);
-        localStorage.setItem('timerSeconds', '60');
-        setTimerComplete(false);
+        if (typeof window !== 'undefined') {
+            setSeconds(60);
+            localStorage.setItem('timerSeconds', '60');
+            setTimerComplete(false);
+        }
     };
 
     if (seconds === null) {
