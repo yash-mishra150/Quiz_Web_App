@@ -124,10 +124,10 @@ export default function Homepage() {
         <div className='overflow-x-hidden sm:flex justify-between'>
             <section className='bg-[#21234B] h-[35vh] sm:h-screen w-screen sm:w-[40vw] lg:w-[40vw] place-content-center sm:p-10'>
                 <Image className='bg-transparent mx-auto mt-[3vh] sm:mt-auto w-[35vw] sm:w-[41vh] m-auto' src={title} alt="alt" />
-                <Image className='bg-transparent h-[30vh] sm:h-[61vh] m-auto  sm:w-auto mt-[2vh] sm:my-16' src={HPV} alt="alt" />
+                <Image className='bg-transparent h-[30vh] sm:h-[61vh] m-auto  sm:w-auto mt-[2vh] sm:my-[8vh]' src={HPV} alt="alt" />
             </section>
             <section className='m-auto mx-auto content-center'>
-                <Image className='w-auto h-[15vh] lg:h-[15vh] m-auto' src={logo} alt="alt" />
+                <Image className='w-auto h-[14vh] lg:h-[14vh] m-auto' src={logo} alt="alt" />
                 {/* <h1 className={` m-auto md:m-0 text-sm sm:text-xs lg:text-lg text-[#4E63CE] w-[85vw] sm:w-[25rem] lg:w-[38.5rem] text-center ${isVisible ? `` : `hidden`}`}>
                     Unleash Your Knowledge : Dive into the Ultimate Quiz Experience
                 </h1> */}
