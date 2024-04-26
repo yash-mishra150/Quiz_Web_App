@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, use } from 'react'
 import Image from "next/image";
 import title from '../../assests/title.svg';
 import OPV from '../../assests/OTPage.svg';
@@ -15,6 +15,9 @@ import Link from 'next/link';
 // import useTimer from '../timer/useTimer';
 // const Timer = dynamic(() => import('../../components/timer/timer'), { ssr: false })
 export default function OTPage() {
+    useEffect(()=>{
+        localStorage.clear();
+    },[])
     const [otp, setotp] = useState({
         "otp": ""
     });
@@ -30,8 +33,10 @@ export default function OTPage() {
     // const [email,setemail] = useState("");
     // setemail(localStorage.getItem('Email'));
 
+    
     const [data, setData] = useState('');
     useEffect(() => {
+        
         // Function to read the email from the cookie
         const getEmailFromCookie = () => {
             const emailCookie = decodeURIComponent(document.cookie)
