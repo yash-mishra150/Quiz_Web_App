@@ -13,7 +13,17 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 
 const Result = () => {
- 
+  function clearCookies() {
+    if (typeof document === 'undefined') return;
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+      const name = cookie.split('=')[0];
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=example.com`;
+    }
+  }
+  useEffect(()=>{
+    clearCookies();
+  })
     const router = useRouter();
     const [score, setScore]= useState(0);
     
