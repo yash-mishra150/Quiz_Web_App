@@ -110,16 +110,16 @@ export default function Homepage() {
             // window.location.href='/dashboard';
 
         } catch (err) {
-            const errorResponse = new ErrorResponse(err);
-            const errorInfo = errorResponse.getError();
+            // const errorResponse = new ErrorResponse(err);
+            // const errorInfo = errorResponse.getError();
 
-            if (errorInfo.details) {
-                return toast.error(errorInfo.details);
-            }
-            else if (errorInfo.error) {
-                return toast.error(errorInfo.error);
-            }
-            // console.log(err)
+            // if (errorInfo.details) {
+            //     return toast.error(errorInfo.details);
+            // }
+            // else if (errorInfo.error) {
+            //     return toast.error(errorInfo.error);
+            // }
+            console.log(err)
             // alert(`Failed to create user:\n${err.getError()}`)
         } finally {
             setLoading(false);
