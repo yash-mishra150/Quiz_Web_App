@@ -1,4 +1,5 @@
 "use client";
+// this is instruction page
 import React, { useState } from "react";
 import Design from "../../assests/title.svg";
 import Image from "next/image";

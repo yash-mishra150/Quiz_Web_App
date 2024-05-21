@@ -123,37 +123,19 @@ export default function OTPage() {
             toast.success('User created successfully!');
             setCookie('istrue', true, 7);
             setTimeout(() => { router.push("/instruction") }, 1000);
-            // window.location.href='/dashboard';
+
 
         } catch (err) {
             setLoading(false)
-            // console.log(err);
+
             const errorResponse = new ErrorResponse(err)
             let errorMessage = errorResponse.getError();
             toast.error(errorMessage);
-            // console.log(err)
-            // console.log(err.getError())
 
-            // alert(`Failed to create user:\n${err.getError()}`)
         } finally {
             setLoading(false);
         }
     }
-    // function getFormData() {
-    //     // Retrieve the JSON string from localStorage
-    //     const formDataJSON = localStorage.getItem('formData');
-
-    //     // Parse the JSON string back into an object
-    //     const formData = JSON.parse(formDataJSON);
-
-    //     // Return the parsed object
-    //     return formData;
-    // }
-
-    // Example usage:
-    // Call the function to retrieve the form data
-    // const formData = getFormData();
-    // const { timeLeft, resetTimer } = useTimer();
     async function handleResend(e) {
         try {
             e.preventDefault();

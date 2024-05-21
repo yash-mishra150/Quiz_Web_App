@@ -102,19 +102,7 @@ const Quiz = () => {
       setLoading(false);
     }
   }
-  // class ErrorResponse {
-  //   constructor(errorObject) {
-  //     this.errorObject = errorObject;
-  //   }
-
-  //   getError() {
-  //     if (this.errorObject && this.errorObject.response && this.errorObject.response.data && 'error' in this.errorObject.response.data) {
-  //       return this.errorObject.response.data.error;
-  //     } else {
-  //       return null; // or handle the case where the error structure doesn't match expectations
-  //     }
-  //   }
-  // }
+  
 
   const sentData = async (score, time_left, token) => {
     try {

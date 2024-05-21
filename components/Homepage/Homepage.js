@@ -80,9 +80,9 @@ export default function Homepage() {
             const studentNumberRegex = /^(22|23)\d{5,6}$/;
             if (!formData.email || !formData.username) throw toast.error("Please fill out all fields");
             else if (!nameRegex.test(formData.username.trim())) throw toast.error("Name cannot contain numbers");
-            // else if (!emailRegex.test(formData.email)) {
-            //     throw toast.error("Enter College Email");
-            // }
+            else if (!emailRegex.test(formData.email)) {
+                throw toast.error("Enter College Email");
+            }
             else if (!studentNumberRegex.test(formData.student_no)) {
                 return toast.error("Invalid Student Number");
             }

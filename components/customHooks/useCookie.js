@@ -40,7 +40,7 @@ export const useCookies = (cookieName) => {
   }, [updateCookieValue]);
 
   const setCookie = useCallback((name, value, days) => {
-    if (typeof document === 'undefined') return; // Ensure this runs only on client side
+    if (typeof document === 'undefined') return; 
     let expires = '';
     if (days) {
       const date = new Date();
