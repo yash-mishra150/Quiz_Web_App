@@ -127,10 +127,10 @@ export default function OTPage() {
 
         } catch (err) {
             setLoading(false)
-            console.log(err);
-            // const errorResponse = new ErrorResponse(err)
-            // let errorMessage = errorResponse.getError();
-            // toast.error(errorMessage);
+            // console.log(err);
+            const errorResponse = new ErrorResponse(err)
+            let errorMessage = errorResponse.getError();
+            toast.error(errorMessage);
             // console.log(err)
             // console.log(err.getError())
 

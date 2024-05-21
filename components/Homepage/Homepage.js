@@ -31,17 +31,45 @@ export default function Homepage() {
     }
     const SITE_KEY = trim("6Lcd2CMpAAAAAKLqwdxjTgnWwzSgAGEgtl0BVOng");
     let router = useRouter();
+
     class ErrorResponse {
         constructor(errorObject) {
             this.errorObject = errorObject;
         }
 
         getError() {
-            if (this.errorObject && this.errorObject.response && this.errorObject.response.data && 'error' in this.errorObject.response.data) {
-                return this.errorObject.response.data.error;
+            if (this.errorObject && this.errorObject.response && this.errorObject.response.data) {
+                const errorMessage = this.errorObject.response.data.error || null;
+                let details = null;
+
+                if (this.errorObject.response.data.detail) {
+                    const taunts = [
+                        "Oh, trying to break me, huh?",
+                        "Nice try, but I'm still standing!",
+                        "Is that all you've got?",
+                        "Haha, you can't stop me that easily!",
+                        "Keep trying, I'm invincible!"
+                    ];
+
+                    // Choose a random taunting message
+                    details = taunts[Math.floor(Math.random() * taunts.length)];
+                }
+
+                return {
+                    error: errorMessage,
+                    details: details
+                };
+            } else {
+                // Handle generic errors without response data
+                return {
+                    error: "An error occurred. Please try again later.",
+                    details: null
+                };
             }
         }
     }
+
+
     async function HandleSubmit(e) {
         try {
             e.preventDefault();
@@ -82,9 +110,15 @@ export default function Homepage() {
             // window.location.href='/dashboard';
 
         } catch (err) {
-            const errorResponse = new ErrorResponse(err)
-            let Message = errorResponse.getError();
-            if (Message) toast.error(Message);
+            const errorResponse = new ErrorResponse(err);
+            const errorInfo = errorResponse.getError();
+
+            if (errorInfo.details) {
+                return toast.error(errorInfo.details);
+            }
+            else if (errorInfo.error) {
+                return toast.error(errorInfo.error);
+            }
             // console.log(err)
             // alert(`Failed to create user:\n${err.getError()}`)
         } finally {
@@ -118,9 +152,9 @@ export default function Homepage() {
     //         setIsVisible(false);
     //     }
     // },[]);
-    useEffect(()=>{
+    useEffect(() => {
         localStorage.clear();
-    },[])
+    }, [])
 
     return (
         <div className='overflow-x-hidden sm:flex justify-between'>
