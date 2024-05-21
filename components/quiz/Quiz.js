@@ -7,9 +7,11 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Result from "../../app/Result/page";
 import toast, { Toaster } from 'react-hot-toast';
+import {useCookies} from '../customHooks/useCookie';
 
 
 const Quiz = () => {
+  const { removeCookie } = useCookies('istrue');
   const [count, setCount] = useState(8);
   const [data, setData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -142,6 +144,7 @@ const Quiz = () => {
 
 
     localStorage.setItem("score", score);
+    removeCookie('istrue'); 
     router.replace("/Result")
     sentData(score, timeLeft, Token);
     return null;

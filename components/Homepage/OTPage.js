@@ -7,6 +7,7 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import {useCookies} from '../customHooks/useCookie';
 // import Cookies from 'universal-cookie';
 // import localStorage from 'local-storage';
 // import TimerComponent from '../timer/TimerComponent';
@@ -15,6 +16,7 @@ import Link from 'next/link';
 // import useTimer from '../timer/useTimer';
 // const Timer = dynamic(() => import('../../components/timer/timer'), { ssr: false })
 export default function OTPage() {
+    
     useEffect(()=>{
         localStorage.clear();
     },[])
@@ -32,7 +34,7 @@ export default function OTPage() {
     const inputRefs = useRef([]);
     // const [email,setemail] = useState("");
     // setemail(localStorage.getItem('Email'));
-
+    const { cookieValue, setCookie, removeCookie } = useCookies('istrue');
     
     const [data, setData] = useState('');
     useEffect(() => {
@@ -114,19 +116,21 @@ export default function OTPage() {
         try {
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
+            // const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
             // console.log(response);
-            setToken(response.data.token.access);
+            // const response = {'access': 2};
+            // setToken(response.data.token.access);
             toast.success('User created successfully!');
+            setCookie('istrue', true, 7);
             setTimeout(() => { router.push("/instruction") }, 1000);
-
             // window.location.href='/dashboard';
 
         } catch (err) {
             setLoading(false)
-            const errorResponse = new ErrorResponse(err)
-            let errorMessage = errorResponse.getError();
-            toast.error(errorMessage);
+            console.log(err);
+            // const errorResponse = new ErrorResponse(err)
+            // let errorMessage = errorResponse.getError();
+            // toast.error(errorMessage);
             // console.log(err)
             // console.log(err.getError())
 
