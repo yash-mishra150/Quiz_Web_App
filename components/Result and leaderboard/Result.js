@@ -11,19 +11,22 @@ import { FaReact } from "react-icons/fa";
 import { RiFlutterFill } from "react-icons/ri";
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useCookies } from '../customHooks/useCookie';
 
 const Result = () => {
-  function clearCookies() {
-    if (typeof document === 'undefined') return;
-    const cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
-      const name = cookie.split('=')[0];
-      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=example.com`;
-    }
-  }
-  useEffect(()=>{
-    clearCookies();
-  })
+  const { removeCookie } = useCookies('istrue');
+  // function clearCookies() {
+  //   if (typeof document === 'undefined') return;
+  //   const cookies = document.cookie.split('; ');
+  //   for (let cookie of cookies) {
+  //     const name = cookie.split('=')[0];
+  //     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=example.com`;
+  //   }
+  // }
+  // useEffect(()=>{
+  //   clearCookies();
+  // })
+    
     const router = useRouter();
     const [score, setScore]= useState(0);
     
@@ -38,8 +41,14 @@ const Result = () => {
       const res= score/4;
     function clickHandler ()
   {
+
+      
      router.push("/leaderboard");
   }
+   useEffect(() => {
+    removeCookie('istrue');
+  }, []); 
+
   return (
     <div className=' flex flex-col lg:flex-row h-[100vh] '>
        <div className=' flex flex-col items-center lg:gap-[20vh]  lg:w-[35vw] w-[100vw] h-[20vh] lg:h-[100vh]  bg-[#21234B]'>

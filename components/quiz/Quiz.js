@@ -7,11 +7,11 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Result from "../../app/Result/page";
 import toast, { Toaster } from 'react-hot-toast';
-import {useCookies} from '../customHooks/useCookie';
+// import {useCookies} from '../customHooks/useCookie';
 
 
 const Quiz = () => {
-  const { removeCookie } = useCookies('istrue');
+  // const { removeCookie } = useCookies('istrue');
  
   
   const [count, setCount] = useState(8);
@@ -161,6 +161,7 @@ const Quiz = () => {
         <div className="w-full bg-[#34377A] h-[8vh] mt-4 rounded-xl">
           <Image
             src={Nimbus}
+            alt="alt"
             className=" bg-transparent mx-auto mt-auto h-full"
           />{" "}
         </div>

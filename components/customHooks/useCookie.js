@@ -9,8 +9,7 @@ export const useCookies = (cookieName) => {
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
       if (cookie.startsWith(name + '=')) {
-        const value = cookie.substring(name.length + 1, cookie.length);
-        return value !== '' ? value : null;
+        return cookie.substring(name.length + 1);
       }
     }
     return null;
@@ -21,14 +20,24 @@ export const useCookies = (cookieName) => {
     return initialCookie !== null ? initialCookie : false;
   });
 
-  useEffect(() => {
-    const cookie = getCookie(cookieName);
-    if (cookie !== null && cookie !== cookieValue) {
-      setCookieValue(cookie);
-    } else if (cookie === null && cookieValue !== false) {
-      setCookieValue(false);
+  const updateCookieValue = useCallback(() => {
+    const newCookieValue = getCookie(cookieName);
+    if (newCookieValue !== cookieValue) {
+      setCookieValue(newCookieValue !== null ? newCookieValue : false);
     }
-  }, [cookieName, getCookie, cookieValue]);
+  }, [cookieName, cookieValue, getCookie]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      updateCookieValue();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [updateCookieValue]);
 
   const setCookie = useCallback((name, value, days) => {
     if (typeof document === 'undefined') return; // Ensure this runs only on client side
@@ -40,17 +49,19 @@ export const useCookies = (cookieName) => {
     }
     document.cookie = name + '=' + (value || '') + expires + '; path=/';
     setCookieValue(value);
+
+    // Trigger the storage event to notify other tabs/windows
+    localStorage.setItem('cookieUpdate', Date.now());
   }, []);
 
-  const removeCookie = (name) => {
+  const removeCookie = useCallback((name) => {
     if (typeof document === 'undefined') return; // Ensure this runs only on client side
-    const cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
-      const name = cookie.split('=')[0];
-      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=example.com`;
-    }
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     setCookieValue(false);
-  }
+
+    // Trigger the storage event to notify other tabs/windows
+    localStorage.setItem('cookieUpdate', Date.now());
+  }, []);
 
   return { cookieValue, setCookie, removeCookie };
 };
