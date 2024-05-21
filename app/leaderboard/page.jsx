@@ -1,5 +1,6 @@
 import React from 'react'
-import Leaderboard from '../../components/Result and leaderboard/Leaderboard';
+import dynamic from 'next/dynamic';
+const Leaderboard = dynamic(() => import('../../components/Result and leaderboard/Leaderboard'), { ssr: false });
 
 const page = () => {
   return (

@@ -1,6 +1,6 @@
+"use client";
 import { useState, useEffect, useCallback } from 'react';
 
-// Custom hook for managing cookies
 export const useCookies = (cookieName) => {
   const getCookie = useCallback((name) => {
     if (typeof document === 'undefined') return null; // Ensure this runs only on client side
@@ -18,13 +18,17 @@ export const useCookies = (cookieName) => {
 
   const [cookieValue, setCookieValue] = useState(() => {
     const initialCookie = getCookie(cookieName);
-    return initialCookie !== null ? initialCookie : false; // Default to false if cookie not present
+    return initialCookie !== null ? initialCookie : false;
   });
 
   useEffect(() => {
     const cookie = getCookie(cookieName);
-    setCookieValue(cookie !== null ? cookie : false); // Update value even if cookie is null
-  }, [cookieName, getCookie]);
+    if (cookie !== null && cookie !== cookieValue) {
+      setCookieValue(cookie);
+    } else if (cookie === null && cookieValue !== false) {
+      setCookieValue(false);
+    }
+  }, [cookieName, getCookie, cookieValue]);
 
   const setCookie = useCallback((name, value, days) => {
     if (typeof document === 'undefined') return; // Ensure this runs only on client side
@@ -35,14 +39,18 @@ export const useCookies = (cookieName) => {
       expires = '; expires=' + date.toUTCString();
     }
     document.cookie = name + '=' + (value || '') + expires + '; path=/';
-    setCookieValue(value); // Update the state with the new value
+    setCookieValue(value);
   }, []);
 
-  const removeCookie = useCallback((name) => {
+  const removeCookie = (name) => {
     if (typeof document === 'undefined') return; // Ensure this runs only on client side
-    document.cookie = name + '=; Max-Age=-99999999;';
-    setCookieValue(false); // Update the state with false when removing the cookie
-  }, []);
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+      const name = cookie.split('=')[0];
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=example.com`;
+    }
+    setCookieValue(false);
+  }
 
   return { cookieValue, setCookie, removeCookie };
 };

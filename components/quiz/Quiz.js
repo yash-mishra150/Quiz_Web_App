@@ -12,6 +12,18 @@ import {useCookies} from '../customHooks/useCookie';
 
 const Quiz = () => {
   const { removeCookie } = useCookies('istrue');
+  function clearCookies() {
+    if (typeof document === 'undefined') return;
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+      const name = cookie.split('=')[0];
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=example.com`;
+    }
+  }
+  useEffect(()=>{
+    clearCookies();
+  })
+  
   const [count, setCount] = useState(8);
   const [data, setData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -144,7 +156,6 @@ const Quiz = () => {
 
 
     localStorage.setItem("score", score);
-    removeCookie('istrue'); 
     router.replace("/Result")
     sentData(score, timeLeft, Token);
     return null;

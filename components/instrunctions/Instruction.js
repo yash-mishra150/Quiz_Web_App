@@ -15,7 +15,7 @@ const Instruction = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setTimeout(() => { router.push("/QuizPage") }, 1000);
+    setTimeout(() => { router.replace("/QuizPage") }, 1000);
   }
   return (
     <div className='overflow-x-hidden sm:flex justify-between'>

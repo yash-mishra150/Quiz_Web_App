@@ -233,7 +233,7 @@ export default function OTPage() {
                                     name="Otp"
                                     placeholder="_"
                                     autoComplete='off'
-                                    className=" w-[10vw] h-[10vw] sm:w-[8vh] sm:h-[8vh] text-black text-[5vw] sm:text-[3.5vh] p-[3.5vw] sm:p-[3vh] rounded-lg outline-none font-bold bg-white"
+                                    className=" w-[10vw] h-[10vw] sm:w-[8vh] sm:h-[8vh] text-black text-[5vw] sm:text-[3.5vh] text-center rounded-lg outline-none font-bold bg-white"
                                     key={index}
                                     ref={(input) => (inputRefs.current[index] = input)}
                                     onChange={(event) => onChange(index, event)}
