@@ -116,10 +116,10 @@ export default function OTPage() {
         try {
             e.preventDefault();
             setLoading(true);
-            // const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
+            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
             // console.log(response);
             // const response = {'access': 2};
-            // setToken(response.data.token.access);
+            setToken(response.data.token.access);
             toast.success('User created successfully!');
             setCookie('istrue', true, 7);
             setTimeout(() => { router.push("/instruction") }, 1000);
