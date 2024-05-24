@@ -43,37 +43,13 @@ export default function Homepage() {
         }
 
         getError() {
-            if (this.errorObject && this.errorObject.response && this.errorObject.response.data) {
-                const errorMessage = this.errorObject.response.data.error || null;
-                let details = null;
-
-                if (this.errorObject.response.data.detail) {
-                    const taunts = [
-                        "Oh, trying to break me, huh?",
-                        "Nice try, but I'm still standing!",
-                        "Is that all you've got?",
-                        "Haha, you can't stop me that easily!",
-                        "Keep trying, I'm invincible!"
-                    ];
-
-                    // Choose a random taunting message
-                    details = taunts[Math.floor(Math.random() * taunts.length)];
-                }
-
-                return {
-                    error: errorMessage,
-                    details: details
-                };
+            if (this.errorObject && this.errorObject.response && this.errorObject.response.data && 'error' in this.errorObject.response.data) {
+                return this.errorObject.response.data.error;
             } else {
-                // Handle generic errors without response data
-                return {
-                    error: "An error occurred. Please try again later.",
-                    details: null
-                };
+                return null; // or handle the case where the error structure doesn't match expectations
             }
         }
     }
-
 
     async function HandleSubmit(e) {
         try {
@@ -85,9 +61,9 @@ export default function Homepage() {
             const studentNumberRegex = /^(22|23)\d{5,6}$/;
             if (!formData.email || !formData.username) throw toast.error("Please fill out all fields");
             else if (!nameRegex.test(formData.username.trim())) throw toast.error("Name cannot contain numbers");
-            else if (!emailRegex.test(formData.email)) {
-                throw toast.error("Enter College Email");
-            }
+            // else if (!emailRegex.test(formData.email)) {
+            //     throw toast.error("Enter College Email");
+            // }
             else if (!studentNumberRegex.test(formData.student_no)) {
                 return toast.error("Invalid Student Number");
             }
@@ -105,7 +81,6 @@ export default function Homepage() {
             // Assuming formData is your FormData object
             // const formDataString = JSON.stringify(Array.from(formData.entries()));
 
-            // // Store the stringified FormData in local storage
             document.cookie = serialize('email', Email, {
                 maxAge: 7200, // 2 hrs
                 path: '/',
@@ -117,13 +92,9 @@ export default function Homepage() {
         } catch (err) {
             const errorResponse = new ErrorResponse(err);
             const errorInfo = errorResponse.getError();
-
-            if (errorInfo.details) {
-                return toast.error(errorInfo.details);
-            }
-            else if (errorInfo.error) {
-                return toast.error(errorInfo.error);
-            }
+            if(errorInfo)
+                return toast.error(errorInfo);
+            
             // console.log(err)
             // alert(`Failed to create user:\n${err.getError()}`)
         } finally {

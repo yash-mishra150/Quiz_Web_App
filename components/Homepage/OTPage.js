@@ -124,7 +124,7 @@ export default function OTPage() {
 
             const errorResponse = new ErrorResponse(err)
             let errorMessage = errorResponse.getError();
-            toast.error(errorMessage);
+            if(errorMessage) return toast.error(errorMessage);
 
         } finally {
             setLoading(false);
