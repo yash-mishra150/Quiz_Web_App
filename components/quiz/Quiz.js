@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import Result from "../../app/Result/page";
 import toast, { Toaster } from 'react-hot-toast';
 import useBeforeUnload from '../customHooks/Loadwarning';
-
+import useFullscreen from '../customHooks/FullScreenWarning';
 
 const Quiz = () => {
+  // useFullscreen();
   // const { removeCookie } = useCookies('istrue');
   const [isClient, setIsClient] = useState(false)
   useEffect(() => {

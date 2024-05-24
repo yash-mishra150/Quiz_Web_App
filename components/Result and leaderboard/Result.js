@@ -47,19 +47,19 @@ const Result = () => {
   }
    useEffect(() => {
     removeCookie('istrue');
-  }, []); 
+  }, [removeCookie]); 
 
   return (
     <div className=' flex flex-col lg:flex-row h-[100vh] '>
        <div className=' flex flex-col items-center lg:gap-[20vh]  lg:w-[35vw] w-[100vw] h-[20vh] lg:h-[100vh]  bg-[#21234B]'>
-        <Image src={Nimbus} className=' bg-transparent lg:mt-[5vh] mt-[2vh] lg:w-[20vw]'/>
-        <Image src={Mid} className=' bg-transparent lg:w-[20vw]  w-[25vw] md:w-[20vw] mt-5 lg:mt-0'/>
+        <Image alt="nimbus" src={Nimbus} className=' bg-transparent lg:mt-[5vh] mt-[2vh] lg:w-[20vw]'/>
+        <Image alt="result vector" src={Mid} className=' bg-transparent lg:w-[20vw]  w-[25vw] md:w-[20vw] mt-5 lg:mt-0'/>
        </div>
 
        <div className="flex flex-col lg:mx-auto  mx-[15vw]  mt-[15vh] lg:mt-[10vh] lg:mt-0">
         <div className="w-[50vw] flex flex-col items-center">
           <div className="mt-[-5vh] lg:mt-[-1vw]">
-            <Image className="lg:h-[20vh] w-[40vw] lg:w-[20vw] ml-[20vw] lg:mx-0 " src={CCC} />
+            <Image alt="CCC logo" className="lg:h-[20vh] w-[40vw] lg:w-[20vw] ml-[20vw] lg:mx-0 " src={CCC} />
           </div>
           <div className=" mx-auto flex flex-col items-center gap-8">
             <h1 className=" font-extrabold text-[#34377A] leading-7  lg:mt-0 lg:text-[2.3vw] text-4xl">
