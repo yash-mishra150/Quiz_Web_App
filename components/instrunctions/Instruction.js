@@ -46,7 +46,7 @@ const Instruction = () => {
                     This assessment test consists of 20 questions
                   </li>
                   <li className="my-[1.5vh] bg-transparent">
-                    We suggest you allow 45 minutes to complete the test.
+                    We suggest you allow 30 minutes to complete the test.
                   </li>
                   <li className="my-[1.5vh] bg-transparent">
                     Do not make click picture and copy question to any browser
@@ -55,7 +55,7 @@ const Instruction = () => {
                     The candidates are advised to read all options thoroughly
                   </li>
                   <li className="my-[1.5vh] bg-transparent">
-                    Use of calculator is prohibited
+                    Please Don&apos;t refresh the page
                   </li>
                 </div>
               </div>

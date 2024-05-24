@@ -8,15 +8,9 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {useCookies} from '../customHooks/useCookie';
-// import Cookies from 'universal-cookie';
-// import localStorage from 'local-storage';
-// import TimerComponent from '../timer/TimerComponent';
-// import { resetTimer } from '../timer/TimerHandler';
-// import dynamic from 'next/dynamic';
-// import useTimer from '../timer/useTimer';
-// const Timer = dynamic(() => import('../../components/timer/timer'), { ssr: false })
+
+
 export default function OTPage() {
-    
     useEffect(()=>{
         localStorage.clear();
     },[])
@@ -116,7 +110,7 @@ export default function OTPage() {
         try {
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
+            const response = await axios.post((process.env.NEXT_PUBLIC_OTP_API || ""), otp);
             // console.log(response);
             // const response = {'access': 2};
             setToken(response.data.token.access);
@@ -139,7 +133,7 @@ export default function OTPage() {
     async function handleResend(e) {
         try {
             e.preventDefault();
-            const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
+            const resend_response = await axios.post((process.env.NEXT_PUBLIC_RESENDAPI_KEY || ""), FormData);
             toast.success("OTP resend successfull");
             // console.log(FormData);
             
@@ -171,15 +165,14 @@ export default function OTPage() {
         const intervalId = setInterval(() => {
             if (seconds > 0) {
                 setSeconds(prevSeconds => {
-                    // Store current value in local storage
                     localStorage.setItem('timerSeconds', (prevSeconds - 1).toString());
-                    return prevSeconds - 1; // Decrease seconds by 1
+                    return prevSeconds - 1;
                 });
             } else {
-                clearInterval(intervalId); // Stop the timer when seconds reach 0
-                setTimerComplete(true); // Set timerComplete to true when timer finishes
+                clearInterval(intervalId);
+                setTimerComplete(true);
             }
-        }, 1000); // Update every second
+        }, 1000);
 
         return () => clearInterval(intervalId);
     }, [seconds]);

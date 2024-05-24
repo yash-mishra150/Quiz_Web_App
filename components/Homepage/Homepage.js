@@ -12,6 +12,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import trim from "lodash/trim";
 import { serialize } from 'cookie';
 
+const SITE_KEY = trim(process.env.NEXT_PUBLIC_SITE_KEY || "");
+
 export default function Homepage() {
     const recaptcha = useRef();
     const [formData, setFormData] = useState({
@@ -25,11 +27,14 @@ export default function Homepage() {
 
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    useEffect(() => {
+        console.clear();
+      }, []);
 
     const handleRecaptchaChange = (value) => {
         formData.recaptchaToken = trim(value);
     }
-    const SITE_KEY = trim("6Lcd2CMpAAAAAKLqwdxjTgnWwzSgAGEgtl0BVOng");
+    
     let router = useRouter();
 
     class ErrorResponse {
@@ -80,23 +85,23 @@ export default function Homepage() {
             const studentNumberRegex = /^(22|23)\d{5,6}$/;
             if (!formData.email || !formData.username) throw toast.error("Please fill out all fields");
             else if (!nameRegex.test(formData.username.trim())) throw toast.error("Name cannot contain numbers");
-            else if (!emailRegex.test(formData.email)) {
-                throw toast.error("Enter College Email");
-            }
+            // else if (!emailRegex.test(formData.email)) {
+            //     throw toast.error("Enter College Email");
+            // }
             else if (!studentNumberRegex.test(formData.student_no)) {
                 return toast.error("Invalid Student Number");
             }
 
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
+            const response = await axios.post((process.env.NEXT_PUBLIC_HOMEPAGE_API || ""), formData);
             // console.log(response);
             let Email = formData.email;
             let student = formData.student_no;
             let Username = formData.username;
 
             toast.success("OTP generated successfully!");
-            setTimeout(() => router.replace('/OTP'), 1000);
+            setTimeout(() => router.push('/OTP'), 1000);
             // Assuming formData is your FormData object
             // const formDataString = JSON.stringify(Array.from(formData.entries()));
 

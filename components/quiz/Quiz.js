@@ -12,7 +12,12 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Quiz = () => {
   // const { removeCookie } = useCookies('istrue');
- 
+  const [isClient, setIsClient] = useState(false)
+  useEffect(() => {
+      setIsClient(true)
+    }, [])
+
+
   
   const [count, setCount] = useState(8);
   const [data, setData] = useState(null);
@@ -20,12 +25,11 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [quizEnded, setQuizEnded] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const initialTimer = localStorage.getItem("left") || 2 * 60;
-  // const [timeLeft, setTimeLeft] = useState(Number(initialTimer));
-  const [timeLeft, setTimeLeft] = useState(45 * 60)
+  const initialTimer = localStorage.getItem("left") || 30 * 60  ;
+  const [timeLeft, setTimeLeft] = useState(Number(initialTimer));
+  // const [timeLeft, setTimeLeft] = useState(45 * 60)
   const router = useRouter();
   useEffect(() => {
-
     fetchData(count);
   }, [count]);
 
@@ -43,7 +47,7 @@ const Quiz = () => {
       }
     });
 
-    if (count < 47) {
+    if (count < 32) {
       setCount(count + 1);
     } else {
       setQuizEnded(true);
@@ -92,13 +96,13 @@ const Quiz = () => {
   async function fetchData(id) {
     try {
       const response = await axios.get(
-        `https://quiz-app-yl47.onrender.com/api/question/${id}/`
+        `${process.env.NEXT_PUBLIC_QUESTION_FETCH_API}/${id}/`
       );
       setData(response.data);
       setLoading(false);
       // console.log(response.data);
     } catch (error) {
-      console.error("Error fetching data: ", error);
+      // console.error("Error fetching data: ", error);
       setLoading(false);
     }
   }
@@ -107,10 +111,10 @@ const Quiz = () => {
   const sentData = async (score, time_left, token) => {
     try {
       const res = await axios.post(
-        'https://quiz-app-yl47.onrender.com/api/score/',
+        process.env.NEXT_PUBLIC_QUIZ_API || "",
         {
           score: score,
-          time_taken: timeLeft
+          time_taken: time_left
         },
         {
           headers: {
@@ -137,14 +141,10 @@ const Quiz = () => {
     router.replace("/Result")
     sentData(score, timeLeft, Token);
     return null;
-
-
-
   }
-
   return (
+    <>
     <div className="flex h-[100vh] overflow-x-hidden">
-      {/* <div className=' bg-[#21234B] w-[7vw]'><Image src={CCC} className=' bg-transparent ' /> </div> */}
       <div className="w-[90vw] mx-auto flex flex-col">
         <div className="w-full bg-[#34377A] h-[8vh] mt-4 rounded-xl">
           <Image
@@ -184,7 +184,7 @@ const Quiz = () => {
                       <span className=" bg-transparent ml-2 text-3xl lg:text-4xl">
                         {count - 7}
                       </span>
-                      /40
+                      /25
                     </h1>
                   </div>
 
@@ -227,6 +227,7 @@ const Quiz = () => {
       </div>
       <Toaster/>
     </div>
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import ReactLoading from "react-loading";
 import crown from "../../assests/crown.png"
 
 const Leaderboard = () => {
+  
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,13 +18,13 @@ const Leaderboard = () => {
     const fetchLeaderboardData = async () => {
       try {
         const response = await axios.get(
-          "https://quiz-app-yl47.onrender.com/api/leaderboard/"
+          process.env.NEXT_PUBLIC_LEADERBOARD_API || ""
         );
         setLeaderboardData(response.data);
         // console.log(response.data)
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching leaderboard data:", error);
+        // console.error("Error fetching leaderboard data:", error);
         setLoading(false);
       }
     };
