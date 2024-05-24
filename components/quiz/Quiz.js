@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Result from "../../app/Result/page";
 import toast, { Toaster } from 'react-hot-toast';
-import useBeforeUnload from '../customHooks/loadwarning';
+import useBeforeUnload from '../customHooks/Loadwarning';
 
 
 const Quiz = () => {
