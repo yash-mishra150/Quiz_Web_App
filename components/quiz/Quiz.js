@@ -96,7 +96,7 @@ const Quiz = () => {
   async function fetchData(id) {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_QUESTION_FETCH_API}/${id}/`
+        `https://quiz-app-yl47.onrender.com/api/question/${id}/`
       );
       setData(response.data);
       setLoading(false);
@@ -111,7 +111,7 @@ const Quiz = () => {
   const sentData = async (score, time_left, token) => {
     try {
       const res = await axios.post(
-        process.env.NEXT_PUBLIC_QUIZ_API || "",
+        "https://quiz-app-yl47.onrender.com/api/score/",
         {
           score: score,
           time_taken: time_left

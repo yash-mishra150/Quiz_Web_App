@@ -110,7 +110,7 @@ export default function OTPage() {
         try {
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post((process.env.NEXT_PUBLIC_OTP_API || ""), otp);
+            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/validate/", otp);
             // console.log(response);
             // const response = {'access': 2};
             setToken(response.data.token.access);
@@ -133,7 +133,7 @@ export default function OTPage() {
     async function handleResend(e) {
         try {
             e.preventDefault();
-            const resend_response = await axios.post((process.env.NEXT_PUBLIC_RESENDAPI_KEY || ""), FormData);
+            const resend_response = await axios.post("https://quiz-app-yl47.onrender.com/auth/resend/", FormData);
             toast.success("OTP resend successfull");
             // console.log(FormData);
             

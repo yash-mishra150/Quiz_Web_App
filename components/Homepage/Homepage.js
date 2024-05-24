@@ -12,7 +12,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import trim from "lodash/trim";
 import { serialize } from 'cookie';
 
-const SITE_KEY = trim(process.env.NEXT_PUBLIC_SITE_KEY || "");
+const SITE_KEY = trim("6Lcd2CMpAAAAAKLqwdxjTgnWwzSgAGEgtl0BVOng");
 
 export default function Homepage() {
     const recaptcha = useRef();
@@ -27,9 +27,9 @@ export default function Homepage() {
 
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    useEffect(() => {
-        console.clear();
-      }, []);
+    // useEffect(() => {
+    //     console.clear();
+    //   }, []);
 
     const handleRecaptchaChange = (value) => {
         formData.recaptchaToken = trim(value);
@@ -94,7 +94,7 @@ export default function Homepage() {
 
             e.preventDefault();
             setLoading(true);
-            const response = await axios.post((process.env.NEXT_PUBLIC_HOMEPAGE_API || ""), formData);
+            const response = await axios.post("https://quiz-app-yl47.onrender.com/auth/otp/", formData);
             // console.log(response);
             let Email = formData.email;
             let student = formData.student_no;

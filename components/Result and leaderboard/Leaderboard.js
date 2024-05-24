@@ -18,7 +18,7 @@ const Leaderboard = () => {
     const fetchLeaderboardData = async () => {
       try {
         const response = await axios.get(
-          process.env.NEXT_PUBLIC_LEADERBOARD_API || ""
+          "https://quiz-app-yl47.onrender.com/api/leaderboard/"
         );
         setLeaderboardData(response.data);
         // console.log(response.data)
