@@ -43,10 +43,10 @@ const Instruction = () => {
                 <h1 className=" mt-[2vh] bg-transparent underline text-2xl xl:text-[4vh]">Instructions:-</h1>
                 <div className=" text-xs lg:text-[2.3vh] bg-[#D9D9D9]">
                   <li className="my-[1.5vh] bg-transparent">
-                    This assessment test consists of 20 questions
+                    This assessment test consists of 25 questions
                   </li>
                   <li className="my-[1.5vh] bg-transparent">
-                    We suggest you allow 30 minutes to complete the test.
+                   The time limit for completing the quiz is 25 minutes.
                   </li>
                   <li className="my-[1.5vh] bg-transparent">
                     Do not make click picture and copy question to any browser

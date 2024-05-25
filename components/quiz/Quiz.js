@@ -26,7 +26,7 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [quizEnded, setQuizEnded] = useState(false);
   const [loading, setLoading] = useState(true);
-  const initialTimer = localStorage.getItem("left") || 30 * 60;
+  const initialTimer = localStorage.getItem("left") || 25 * 60;
   const [timeLeft, setTimeLeft] = useState(Number(initialTimer));
   // const [timeLeft, setTimeLeft] = useState(45 * 60)
   const router = useRouter();
