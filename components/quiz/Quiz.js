@@ -20,7 +20,7 @@ const Quiz = () => {
 
   useBeforeUnload('Reloading this page will result in data loss.');
   
-  const [count, setCount] = useState(8);
+  const [count, setCount] = useState(2);
   const [data, setData] = useState(null);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [score, setScore] = useState(0);
@@ -48,7 +48,7 @@ const Quiz = () => {
       }
     });
 
-    if (count < 32) {
+    if (count < 26) {
       setCount(count + 1);
     } else {
       setQuizEnded(true);
@@ -136,8 +136,6 @@ const Quiz = () => {
 
 
   if (quizEnded) {
-
-
     localStorage.setItem("score", score);
     router.replace("/Result")
     sentData(score, timeLeft, Token);
@@ -183,7 +181,7 @@ const Quiz = () => {
                       </h3>
                       <h1 className=" bg-transparent mr-[7vw] font-medium text-xl">
                         <span className=" bg-transparent ml-2 text-3xl lg:text-4xl">
-                          {count - 7}
+                          {count - 1}
                         </span>
                         /25
                       </h1>
